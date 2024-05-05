@@ -18,8 +18,7 @@ fn main() {
             println!("You got {}/{} correct. {:.1}%", v.len() - count, v.len(), ((v.len() - count ) as f32 / v.len() as f32) * 100.);
         }
     }
-    println!("{:?}", decode_answers());
-    println!("{:?}", decode_response());
+
 }
 fn decode_answers() -> Result<Vec<char>, Error> {
     fs::read_to_string("answers.txt")?
