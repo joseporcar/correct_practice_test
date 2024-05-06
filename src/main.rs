@@ -8,7 +8,7 @@ fn main() {
                 println!("there is an unequal number of answers and responses");
                 return;
             }
-            let mistakes = v.iter().zip(u).enumerate().filter(|x| x.1 .1 != *x.1 .0);
+            let mistakes = v.iter().zip(u).enumerate().filter(|x| x.1 .1.to_ascii_uppercase() != x.1 .0.to_ascii_uppercase());
             
             let mut count = 0;
             for m in mistakes {
@@ -28,7 +28,7 @@ fn decode_answers() -> Result<Vec<char>, Error> {
             s.trim()
                 .chars()
                 .find(|c| c.is_alphabetic())
-                .ok_or(Error::other("answer file empty"))
+                .ok_or(Error::other("answer file empty or has a blank line in between"))
         })
         .collect()
 }
@@ -40,7 +40,7 @@ fn decode_response() -> Result<Vec<char>, Error> {
             s.trim()
                 .chars()
                 .next()
-                .ok_or(Error::other("answer file empty"))
+                .ok_or(Error::other("response file empty or has a blank line in between"))
         })
         .collect()
 }
